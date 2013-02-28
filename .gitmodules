@@ -1,0 +1,6 @@
+[submodule "submodules/xr-http-json"]
+	path = submodules/xr-http-json
+	url = https://github.com/inorton/xr-http-json.git
+[submodule "submodules/xr-include"]
+	path = submodules/xr-include
+	url = https://github.com/inorton/xr-include.git
