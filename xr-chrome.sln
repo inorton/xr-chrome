@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XR.Chrome", "XR.Chrome\XR.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XR.Chrome.Tests", "XR.Chrome.Tests\XR.Chrome.Tests.csproj", "{10A25011-16E3-40BA-9BBE-84D90746DBA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XR.Framework", "XR.Framework\XR.Framework.csproj", "{F5EA2FE8-B793-4EB5-B2A5-8539ADF4E6FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{77CE56C4-F4D6-461D-80E0-B1DA0BC81034}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77CE56C4-F4D6-461D-80E0-B1DA0BC81034}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77CE56C4-F4D6-461D-80E0-B1DA0BC81034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5EA2FE8-B793-4EB5-B2A5-8539ADF4E6FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5EA2FE8-B793-4EB5-B2A5-8539ADF4E6FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5EA2FE8-B793-4EB5-B2A5-8539ADF4E6FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5EA2FE8-B793-4EB5-B2A5-8539ADF4E6FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = XR.Chrome\XR.Chrome.csproj
