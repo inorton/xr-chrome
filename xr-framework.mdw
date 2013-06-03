@@ -1,0 +1,7 @@
+<WorkspaceItem ctype="Workspace">
+  <Items>
+    <Item>xr-chrome.sln</Item>
+    <Item>submodules/xr-include/xr-include.sln</Item>
+    <Item>submodules/xr-http-json/xr-http-json.sln</Item>
+  </Items>
+</WorkspaceItem>

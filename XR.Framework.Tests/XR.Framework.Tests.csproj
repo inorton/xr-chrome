@@ -5,11 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F5EA2FE8-B793-4EB5-B2A5-8539ADF4E6FC}</ProjectGuid>
+    <ProjectGuid>{00BEB8B0-CB05-40BE-BC16-0F052CD1BD88}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>XR.Framework</RootNamespace>
-    <AssemblyName>XR.Framework</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>XR.Framework.Tests</RootNamespace>
+    <AssemblyName>XR.Framework.Tests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +30,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Jayrock">
       <HintPath>..\submodules\xr-http-json\JsonRpcHost\bin\Debug\Jayrock.dll</HintPath>
     </Reference>
@@ -49,12 +51,30 @@
     <Reference Include="xr-include">
       <HintPath>..\submodules\xr-include\xr-include\bin\Debug\xr-include.dll</HintPath>
     </Reference>
-    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BackendServer.cs" />
-    <Compile Include="Helpers.cs" />
+    <Compile Include="Backend.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\XR.Framework\XR.Framework.csproj">
+      <Project>{F5EA2FE8-B793-4EB5-B2A5-8539ADF4E6FC}</Project>
+      <Name>XR.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="static\" />
+    <Folder Include="static\wwwroot\" />
+    <Folder Include="templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="static\wwwroot\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="templates\about.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

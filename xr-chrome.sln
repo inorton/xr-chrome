@@ -7,12 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XR.Chrome.Tests", "XR.Chrom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XR.Framework", "XR.Framework\XR.Framework.csproj", "{F5EA2FE8-B793-4EB5-B2A5-8539ADF4E6FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XR.Framework.Tests", "XR.Framework.Tests\XR.Framework.Tests.csproj", "{00BEB8B0-CB05-40BE-BC16-0F052CD1BD88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00BEB8B0-CB05-40BE-BC16-0F052CD1BD88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00BEB8B0-CB05-40BE-BC16-0F052CD1BD88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00BEB8B0-CB05-40BE-BC16-0F052CD1BD88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00BEB8B0-CB05-40BE-BC16-0F052CD1BD88}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10A25011-16E3-40BA-9BBE-84D90746DBA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10A25011-16E3-40BA-9BBE-84D90746DBA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10A25011-16E3-40BA-9BBE-84D90746DBA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
