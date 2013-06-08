@@ -16,18 +16,25 @@ namespace XR.Framework
 		public bool Finished { get; set; }
 	}
 
-	public delegate void RewriteUriRequestHandler (object sender, RewriteUriArgs args);
+	public class RequestRoute
+	{
+		public string Rootdir { get; set; }
+		public string VirtualPathFile { get; set; }
+		public Regex Match { get; set; }
+		public Type ContextType { get; set; }
+	}
 
 	public class BackendServer : HttpServer
 	{
+		public string TemplateRoot { get; set; }
+		List<RequestRoute> requestRoutes = new List<RequestRoute> ();
 		List<string> staticFolders = new List<string> ();
-		Dictionary<string,Processor> xriPaths = new Dictionary<string, Processor> ();
-		Dictionary<string,string> mimeTypes = new Dictionary<string, string> ();
 
-		public event RewriteUriRequestHandler RewriteUri;
+		Dictionary<string,string> mimeTypes = new Dictionary<string, string> ();
 
 		public BackendServer ()
 		{
+			TemplateRoot = "templates";
 			RegisterMimeType ("text/plain", ".txt");
 			RegisterMimeType ("text/css", ".css");
 			RegisterMimeType ("text/html", ".html", ".htm");
@@ -51,14 +58,15 @@ namespace XR.Framework
 			}
 		}
 
-		public void AddXRIPath<T> (string localPath, string serverPath)
-			where T : class, new()
+		public void AddDynamicPath<T> (string rootDir, string vPathFile, Regex vPathMatch)
+			where T : RequestContextBase, new()
 		{
-			lock (xriPaths) {
-				xriPaths [serverPath] = new Processor () { 
-					RootDirectory = localPath,
-					Context = new T(),
-				};
+			lock (requestRoutes) {
+				requestRoutes.Add (new RequestRoute () { 
+					ContextType = typeof(T),
+					Rootdir = rootDir, 
+					VirtualPathFile = vPathFile, 
+					Match = vPathMatch });
 			}
 		}
 
@@ -85,11 +93,8 @@ namespace XR.Framework
 			return type;
 		}
 
-		public void HandleWebRequestStart (object sender, UriRequestEventArgs args)
+		public virtual void HandleWebRequestStart (object sender, UriRequestEventArgs args)
 		{
-			if (RewriteUri != null) {
-				RewriteUri (sender, new RewriteUriArgs () { RequestedUri = args.Request.Url });
-			}
 		}
 
 		public void HandleWebRequest (object sender, UriRequestEventArgs args)
@@ -122,15 +127,15 @@ namespace XR.Framework
 
 					// either 404 or a file in our xr-includes list
 					if (args.Handled == false) {
-						foreach (var serverPath in xriPaths.Keys) {
-							var proc = xriPaths [serverPath];
-							var file = proc.VirtualToLocalPath (args.Request.Url.AbsolutePath);
-							if (File.Exists (file)) {
-								args.Handled = true;
-								args.SetResponseState (200);
-								args.SetResponseType (LookupMimeType (file));
-
-								proc.Transform (args.Request.Url.AbsolutePath, args.ResponsStream);
+						foreach (var route in requestRoutes) {
+							if (route.Match.IsMatch (args.Request.Url.AbsolutePath)) {
+								var context = Activator.CreateInstance (route.ContextType) as RequestContextBase;
+								if (context.Load (args)) {
+									var proc = new Processor () { 
+										RootDirectory = TemplateRoot,
+										Context = context };
+									proc.Transform (route.VirtualPathFile, args.ResponsStream);
+								}
 								break;
 							}
 						}
